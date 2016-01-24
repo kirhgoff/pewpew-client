@@ -6,12 +6,12 @@ import React, {
   View
 } from 'react-native';
 
-var StopSmoking = require('./src/StopSmoking.js');
+var SmokingControl = require('./src/SmokingControl.js');
 
 var PewPew = React.createClass({
   render: function() {
     return (
-      <StopSmoking/>
+      <SmokingControl/>
     );
   },
 });

@@ -6,7 +6,9 @@ import React, {
   View
 } from 'react-native';
 
-class StopSmoking extends Component {
+var sampleData = {smokeToday: 8, smokePerDay: 5, smokePerMonth: 150}
+
+class SmokingControl extends Component {
   render() {
     return (
       <View style={styles.container}>
@@ -44,4 +46,4 @@ const styles = StyleSheet.create({
 });
 
 
-module.exports = StopSmoking;
+module.exports = SmokingControl;
