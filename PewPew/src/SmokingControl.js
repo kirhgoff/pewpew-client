@@ -8,6 +8,8 @@ import React, {
   TouchableNativeFeedback
 } from 'react-native';
 
+import Store from 'react-native-store';
+
 class ControlPanel extends Component {
   constructor(props) {
     super(props);
