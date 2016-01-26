@@ -27,14 +27,13 @@ class ControlPanel extends Component {
     return (
     <View style={styles.container}>
       <TouchableElement 
-        style={styles.button} 
         onPress={this.handleClick.bind(this)}
         background={TouchableNativeFeedback.Ripple()}>
-        <View>
-          <Text style={styles.buttonText}>+ 4</Text>
+        <View  style={styles.button} > 
+          <Text style={styles.buttonText}>+ 1</Text>
         </View>
       </TouchableElement>
-      <Text style={styles.welcome}>
+      <Text style={styles.smokedTodayLabel}>
         Smoked {this.state.smokedToday} cigarettes!
       </Text>
     </View>
@@ -54,33 +53,33 @@ class SmokingControl extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  buttonText: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#A5FAFA',
+    flexDirection: 'row', 
+    height: 100, 
+    padding: 20
   },
   button: {
-    flex: 1,
+    flex: 0.3,
+    width:100,
+    borderWidth: 1,
+    borderRadius: 20,
+    borderColor: '#555555', 
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#A5FAFA',
+    backgroundColor: '#AAAAFF',
   },
-  welcome: {
+  buttonText: {
+    flex: 2,
+    textAlign: 'center',
+    fontSize: 20,
+    margin:10, 
+    //backgroundColor: '#FFAAFF',
+  },
+  smokedTodayLabel: {
+    flex: 0.6,
     fontSize: 20,
     textAlign: 'center',
     margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
+  }
 });
 
 
