@@ -8,20 +8,30 @@ import React, {
 
 var sampleData = {smokeToday: 8, smokePerDay: 5, smokePerMonth: 150}
 
+class ControlPanel extends Component {
+  render() {
+    return (
+      <Button/>
+      <TodayPanel/>
+    );
+  }
+}
+
+class InfoPanel extends Component {
+  render() {
+    return (
+      <Button/>
+      <TodayPanel/>
+    );
+  }
+}
+
+
 class SmokingControl extends Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native 48!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.android.js
-        </Text>
-        <Text style={styles.instructions}>
-          Shake or press menu button for dev menu
-        </Text>
-      </View>
+      <ControlPanel/>
+      <InfoPanel/>
     );
   }
 }
