@@ -1,37 +1,53 @@
 import React, {
-  AppRegistry,
   Component,
   StyleSheet,
   Text,
-  View
+  View,
+  Platform,
+  TouchableHighlight,
+  TouchableNativeFeedback
 } from 'react-native';
 
-var sampleData = {smokeToday: 8, smokePerDay: 5, smokePerMonth: 150}
-
 class ControlPanel extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {smokedToday: 0};
+  }
+
+  handleClick(event) {
+    this.setState({smokedToday: this.state.smokedToday + 1});
+  }
+
   render() {
+    //http://stackoverflow.com/questions/29872918/how-to-add-a-button-in-react-native
+    var TouchableElement = TouchableHighlight;
+    if (Platform.OS === 'android') {
+     TouchableElement = TouchableNativeFeedback;
+    }
     return (
-      <Button/>
-      <TodayPanel/>
+    <View style={styles.container}>
+      <TouchableElement 
+        style={styles.button} 
+        onPress={this.handleClick.bind(this)}
+        background={TouchableNativeFeedback.Ripple()}>
+        <View>
+          <Text style={styles.buttonText}>+ 4</Text>
+        </View>
+      </TouchableElement>
+      <Text style={styles.welcome}>
+        Smoked {this.state.smokedToday} cigarettes!
+      </Text>
+    </View>
     );
   }
 }
-
-class InfoPanel extends Component {
-  render() {
-    return (
-      <Button/>
-      <TodayPanel/>
-    );
-  }
-}
-
 
 class SmokingControl extends Component {
   render() {
     return (
-      <ControlPanel/>
-      <InfoPanel/>
+      <View>
+        <ControlPanel/>
+      </View>
     );
   }
 }
@@ -42,6 +58,18 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
+  },
+  buttonText: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#A5FAFA',
+  },
+  button: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#A5FAFA',
   },
   welcome: {
     fontSize: 20,
