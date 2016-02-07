@@ -8,15 +8,44 @@ import React, {
   TouchableNativeFeedback
 } from 'react-native';
 
-import Store from 'react-native-store';
+import SQLite from 'react-native-sqlite-storage';
+
+var database_name = "Test.db";
+var database_version = "1.0";
+var database_displayname = "SQLite Test Database";
+var database_size = 200000;
+var db;
 
 class ControlPanel extends Component {
   constructor(props) {
     super(props);
     this.state = {smokedToday: 0};
+
+    console.log("Checking database");
+    SQLite.openDatabase(database_name, database_version, database_displayname, database_size).then((DB) => {
+      db = DB;
+    }).catch((error) => {
+      console.log(error);
+    });
+
+    db.executeSql('CREATE TABLE IF NOT EXISTS Version( '
+      + 'version_id INTEGER PRIMARY KEY NOT NULL); ').catch((error) => {  
+      that.errorCB(error) 
+    });
+
+    db.executeSql('SELECT * FROM Version').then(([tx,results]) => {
+      var len = results.rows.length;
+      for (let i = 0; i < len; i++) {
+        let row = results.rows.item(i);
+      }
+    }).catch((error) => { 
+      console.log(error);
+    });
+
   }
 
   handleClick(event) {
+    console.log ("Event caught 2");
     this.setState({smokedToday: this.state.smokedToday + 1});
   }
 
