@@ -10,6 +10,10 @@ import React, {
 
 import SQLite from 'react-native-sqlite-storage';
 
+SQLite.DEBUG(true);
+SQLite.enablePromise(true);
+SQLite.enablePromise(false);
+
 var database_name = "Test.db";
 var database_version = "1.0";
 var database_displayname = "SQLite Test Database";
@@ -22,17 +26,24 @@ class ControlPanel extends Component {
     this.state = {smokedToday: 0};
 
     console.log("Checking database");
-    SQLite.openDatabase(database_name, database_version, database_displayname, database_size).then((DB) => {
+
+    var db=SQLite.openDatabase(database_name, database_version, database_displayname, database_size)
+    /*.then((DB) => {
       db = DB;
     }).catch((error) => {
       console.log(error);
-    });
+    }); */
+    
 
     db.executeSql('CREATE TABLE IF NOT EXISTS Version( '
-      + 'version_id INTEGER PRIMARY KEY NOT NULL); ').catch((error) => {  
+      + 'version_id INTEGER PRIMARY KEY NOT NULL); ');
+
+    db.executeSql('SELECT * FROM Version');
+/*
+    .catch((error) => {  
       that.errorCB(error) 
     });
-
+/*
     db.executeSql('SELECT * FROM Version').then(([tx,results]) => {
       var len = results.rows.length;
       for (let i = 0; i < len; i++) {
@@ -41,7 +52,7 @@ class ControlPanel extends Component {
     }).catch((error) => { 
       console.log(error);
     });
-
+*/
   }
 
   handleClick(event) {
